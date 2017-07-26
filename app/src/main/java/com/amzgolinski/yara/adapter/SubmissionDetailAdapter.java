@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -21,7 +20,6 @@ import com.amzgolinski.yara.service.YaraUtilityService;
 import com.amzgolinski.yara.ui.SubmissionDetailFragment;
 import com.amzgolinski.yara.ui.SubmissionListFragment;
 import com.amzgolinski.yara.util.Utils;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.squareup.picasso.Picasso;
 
 import net.dean.jraw.models.VoteDirection;
@@ -40,11 +38,9 @@ public class SubmissionDetailAdapter extends CursorAdapter {
   @BindView(R.id.submission_detail_author) TextView mAuthor;
   @BindView(R.id.submission_detail_image) ImageView mThumbnail;
 
-  private FirebaseAnalytics mFirebaseAnalytics;
 
   public SubmissionDetailAdapter(Context context, Cursor c, int flags) {
     super(context, c, flags);
-    mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
   }
 
   @Override
@@ -116,8 +112,6 @@ public class SubmissionDetailAdapter extends CursorAdapter {
           }
         });
       }
-
-
     } else {
       mThumbnail.setVisibility(View.GONE);
     }
@@ -138,7 +132,6 @@ public class SubmissionDetailAdapter extends CursorAdapter {
       public void onClick(View v) {
         long submissionId = Long.parseLong((String)v.getTag(R.string.submission_id));
         int vote = (Integer) v.getTag(R.string.vote);
-        logVote(submissionId, vote);
         YaraUtilityService.submitVote(mContext, submissionId, vote, Utils.UPVOTE);
       }
     });
@@ -158,19 +151,9 @@ public class SubmissionDetailAdapter extends CursorAdapter {
       public void onClick(View v) {
         long submissionId = Long.parseLong((String)v.getTag(R.string.submission_id));
         int vote = (Integer) v.getTag(R.string.vote);
-        logVote(submissionId, vote);
         YaraUtilityService.submitVote(mContext, submissionId, vote, Utils.DOWNVOTE);
       }
     });
   }
 
-  private void logVote(long submissionId, int direction) {
-    Bundle bundle = new Bundle();
-    bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Long.toString(submissionId));
-    bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, Integer.toString(direction));
-    bundle.putString(
-        FirebaseAnalytics.Param.ITEM_LOCATION_ID,
-        mContext.getResources().getString(R.string.location_detail));
-    mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-  }
 }

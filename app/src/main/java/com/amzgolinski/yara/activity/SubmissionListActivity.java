@@ -19,7 +19,6 @@ import com.amzgolinski.yara.callbacks.AccountRetrievedCallback;
 import com.amzgolinski.yara.service.YaraUtilityService;
 import com.amzgolinski.yara.sync.SubredditSyncAdapter;
 import com.amzgolinski.yara.util.Utils;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import net.dean.jraw.auth.AuthenticationManager;
 import net.dean.jraw.auth.AuthenticationState;
@@ -36,7 +35,6 @@ public class SubmissionListActivity extends AppCompatActivity
 
   private DrawerLayout mDrawerLayout;
   @BindView(R.id.no_accounts) TextView mEmpty;
-  private FirebaseAnalytics mFirebaseAnalytics;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +78,6 @@ public class SubmissionListActivity extends AppCompatActivity
 
     //calling sync state is necessary or else your hamburger icon wont show up
     actionBarDrawerToggle.syncState();
-
-    // Firebase analytics
-    mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
   }
 
   @Override

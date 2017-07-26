@@ -30,9 +30,6 @@ import com.amzgolinski.yara.service.YaraUtilityService;
 import com.amzgolinski.yara.sync.SubredditSyncAdapter;
 import com.amzgolinski.yara.tasks.FetchSubredditsTask;
 import com.amzgolinski.yara.util.Utils;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 
 import net.dean.jraw.auth.AuthenticationManager;
 import net.dean.jraw.auth.AuthenticationState;
@@ -160,12 +157,6 @@ public class SubmissionListFragment extends Fragment
     });
     submissionsList.setAdapter(mAdapter);
     mEmpty.setVisibility(View.GONE);
-
-    // ad unit
-    MobileAds.initialize(getContext(), getContext().getResources().getString(R.string.pub_id));
-    AdView mAdView = (AdView) root.findViewById(R.id.ad_view);
-    AdRequest adRequest = new AdRequest.Builder().build();
-    mAdView.loadAd(adRequest);
 
     return root;
   }

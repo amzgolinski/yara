@@ -18,7 +18,7 @@
 
   <!-- submission item -->
   <dimen name="submission_item_horiz_padding">8dp</dimen>
-  <dimen name="submission_item_text_size">12sp</dimen>
+  <dimen name="submission_item_text_size">14sp</dimen>
   <dimen name="submission_item_title_size">16sp</dimen>
   <dimen name="submission_item_padding_start">12dp</dimen>
   <dimen name="submission_item_detail_padding_start">4dp</dimen>

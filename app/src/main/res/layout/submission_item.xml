@@ -9,7 +9,6 @@
     android:paddingTop="10dp">
 
   <RelativeLayout
-
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:paddingEnd="@dimen/submission_item_horiz_padding"
@@ -25,7 +24,6 @@
           style="@style/image"
           android:src="@drawable/ic_do_not_distrub_black_24dp"
           android:transitionName="image"/>
-
     </FrameLayout>
 
 
@@ -34,7 +32,8 @@
         style="@style/submission_item_subreddit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/thumbnail_container"/>
+        android:layout_toEndOf="@id/thumbnail_container"
+        android:text="r/todayilearned"/>
 
     <TextView
         android:id="@+id/submission_item_author"
@@ -57,15 +56,15 @@
 
   <RelativeLayout
       android:layout_width="match_parent"
-      android:layout_marginTop="8dp"
-      android:layout_height="36dp">
+      android:layout_height="36dp"
+      android:layout_marginTop="8dp">
 
     <ImageView
         android:id="@+id/submission_item_icon_comment"
+        style="@style/submission_item_comment_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/submission_item_comment_icon"
-        android:src="@drawable/ic_comment_black_24dp"/>
+        android:src="@drawable/ic_comment_black_24dp" />
 
     <TextView
         android:id="@+id/submission_item_comments"
@@ -73,37 +72,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/submission_item_icon_comment"
-        android:text="12345 comments"/>
+        android:text="12345" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/submission_item_comments"
         android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@id/submission_item_comments"
         android:gravity="end"
         android:orientation="horizontal">
 
       <ImageView
           android:id="@+id/submission_item_up_arrow"
+          style="@style/submission_item_detail_icon"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          style="@style/submission_item_detail_icon"
-          android:src="@drawable/ic_arrow_upward_black_24dp"/>
+          android:src="@drawable/ic_arrow_upward_black_24dp" />
 
       <TextView
           android:id="@+id/submission_item_score"
           style="@style/submission_item_score"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="78907"/>
+          android:text="78907" />
 
       <ImageView
           android:id="@+id/submission_item_down_arrow"
+          style="@style/submission_item_detail_icon"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          style="@style/submission_item_detail_icon"
-          android:src="@drawable/ic_arrow_downward_black_24dp"/>
+          android:src="@drawable/ic_arrow_downward_black_24dp" />
     </LinearLayout>
+
   </RelativeLayout>
 
 </LinearLayout>

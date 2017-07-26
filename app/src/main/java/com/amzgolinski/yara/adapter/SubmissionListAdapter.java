@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,7 +21,6 @@ import com.amzgolinski.yara.data.RedditContract;
 import com.amzgolinski.yara.service.YaraUtilityService;
 import com.amzgolinski.yara.ui.SubmissionListFragment;
 import com.amzgolinski.yara.util.Utils;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.squareup.picasso.Picasso;
 
 import net.dean.jraw.models.VoteDirection;
@@ -35,15 +33,11 @@ public class SubmissionListAdapter extends RecyclerView.Adapter<SubmissionListAd
   // Store the context for easy access
   private Context mContext;
   private CursorAdapter mCursorAdapter;
-  private FirebaseAnalytics mFirebaseAnalytics;
 
-  private static int AD_TYPE = 1 ;
-  private static int CONTENT_TYPE = 2 ;
 
   public SubmissionListAdapter(Context context, Cursor cursor, RedditDownloadCallback callback) {
 
     mContext = context;
-    mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
     mCursorAdapter = new CursorAdapter(mContext, cursor, 0) {
 
       @Override
@@ -104,7 +98,6 @@ public class SubmissionListAdapter extends RecyclerView.Adapter<SubmissionListAd
             long submissionId = Long.parseLong((String)v.getTag(R.string.submission_id));
             int vote = (Integer) v.getTag(R.string.vote);
             YaraUtilityService.submitVote(mContext, submissionId, vote, Utils.UPVOTE);
-            logVote(submissionId, vote);
           }
         });
 
@@ -125,7 +118,6 @@ public class SubmissionListAdapter extends RecyclerView.Adapter<SubmissionListAd
             long submissionId = Long.parseLong((String)v.getTag(R.string.submission_id));
             int vote = (Integer) v.getTag(R.string.vote);
             YaraUtilityService.submitVote(mContext, submissionId, vote, Utils.DOWNVOTE);
-            logVote(submissionId, vote);
           }
         });
 
@@ -144,16 +136,6 @@ public class SubmissionListAdapter extends RecyclerView.Adapter<SubmissionListAd
           forum.setTint(mContext.getColor(R.color.gray_300));
           thumbnailView.setImageDrawable(forum);
         }
-      }
-
-      private void logVote(long submissionId, int direction) {
-        Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Long.toString(submissionId));
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, Integer.toString(direction));
-        bundle.putString(
-            FirebaseAnalytics.Param.ITEM_LOCATION_ID,
-            mContext.getResources().getString(R.string.location_list));
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
       }
     };
   }
