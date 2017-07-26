@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.amzgolinski.yara">
+
+  <!-- Permissions to access the internet -->
+  <uses-permission android:name="android.permission.INTERNET"/>
+
+  <!-- Permissions required by the sync adapter -->
+  <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+  <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+  <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+  <!-- Permissions required to make our UI more friendly -->
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+  <application
+      android:name=".YaraApplication"
+      android:allowBackup="true"
+      android:icon="@mipmap/ic_launcher"
+      android:label="@string/app_name"
+      android:supportsRtl="true"
+      android:theme="@style/Theme.Yara.Light">
+    <meta-data
+        android:name="net.dean.jraw.USER_AGENT_OVERRIDE"
+        android:value="android:com.amgolinski.yara:v1.0.0 (by /u/capstone_test)"/>
+
+    <activity
+        android:name=".activity.SubmissionListActivity"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.Yara.Light.NoActionBar">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+    <activity
+        android:name=".activity.LoginActivity"
+        android:label="@string/title_login_activity"
+        android:theme="@style/Theme.Yara.Light.NoActionBar"/>
+    <activity
+        android:name=".activity.SubredditActivity"
+        android:label="@string/title_activity_subreddit"
+        android:parentActivityName=".activity.SubmissionListActivity"
+        android:theme="@style/Theme.Yara.Light.NoActionBar">
+
+      <!-- Parent activity meta-data to support 4.0 and lower -->
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".activity.SubmissionListActivity"/>
+    </activity>
+    <activity
+        android:name=".activity.AccountsActivity"
+        android:label="@string/title_activity_accounts"
+        android:parentActivityName=".activity.SubmissionListActivity"
+        android:theme="@style/Theme.Yara.Light">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value="com.amzgolinski.yara.activity.SubmissionListActivity"/>
+    </activity>
+    <activity
+        android:name=".activity.SubmissionDetailActivity"
+        android:parentActivityName=".activity.SubmissionListActivity"
+        android:theme="@style/Theme.Yara.Light">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value="com.amzgolinski.yara.activity.SubmissionListActivity"/>
+    </activity>
+    <activity
+        android:name=".activity.SubmitCommentActivity"
+        android:label="@string/title_activity_submit_comment"
+        android:parentActivityName=".activity.SubmissionDetailActivity"
+        android:theme="@style/Theme.Yara.Light">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value="com.amzgolinski.yara.activity.SubmissionDetailActivity"/>
+    </activity>
+
+    <provider
+        android:name=".data.RedditProvider"
+        android:authorities="com.amzgolinski.yara.provider"
+        android:enabled="true"
+        android:syncable="true"
+        android:exported="false">
+    </provider>
+
+    <!-- SyncAdapter's dummy authentication service -->
+    <service android:name=".sync.YaraAuthenticatorService">
+      <intent-filter>
+        <action android:name="android.accounts.AccountAuthenticator"/>
+      </intent-filter>
+
+      <meta-data
+          android:name="android.accounts.AccountAuthenticator"
+          android:resource="@xml/authenticator"/>
+    </service>
+
+    <!-- The SyncAdapter service -->
+    <service
+        android:name=".sync.SubredditSyncService"
+        android:exported="true">
+      <intent-filter>
+        <action android:name="android.content.SyncAdapter"/>
+      </intent-filter>
+
+      <meta-data
+          android:name="android.content.SyncAdapter"
+          android:resource="@xml/sync_adapter"/>
+    </service>
+
+    <receiver
+        android:name=".widget.YaraWidgetProvider"
+        android:enabled="true"
+        android:label="@string/appwidget_text">
+      <intent-filter>
+        <action android:name="com.amzgolinski.yara.ACTION_DATA_UPDATED"/>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+
+      <meta-data
+          android:name="android.appwidget.provider"
+          android:resource="@xml/yara_widget_info"/>
+    </receiver>
+
+    <service
+        android:name=".service.YaraUtilityService"
+        android:exported="false"/>
+    <service
+        android:name=".service.YaraWidgetService"
+        android:exported="false"
+        android:permission="android.permission.BIND_REMOTEVIEWS"/>
+
+  </application>
+
+</manifest>

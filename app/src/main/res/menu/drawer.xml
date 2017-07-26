@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <group android:checkableBehavior="single">
+    <item
+      android:id="@+id/drawer_accounts"
+      android:icon="@drawable/ic_account_circle_black_24dp"
+      android:title="@string/accounts_drawer_title"/>
+    <item
+      android:id="@+id/drawer_subscriptions"
+      android:icon="@drawable/ic_settings_black_24dp"
+      android:title="@string/subscriptions_drawer_title"/>
+  </group>
+
+</menu>

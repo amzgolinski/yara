@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="navigation_drawer_options_array">
+    <item>Accounts</item>
+    <item>Subscriptions</item>
+  </string-array>
+
+  <string-array name="scopes">
+    <item>account</item>
+    <item>edit</item>
+    <item>identity</item>
+    <item>mysubreddits</item>
+    <item>read</item>
+    <item>save</item>
+    <item>subscribe</item>
+    <item>submit</item>
+    <item>vote</item>
+  </string-array>
+
+</resources>

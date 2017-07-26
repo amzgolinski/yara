@@ -1,0 +1,43 @@
+<resources>
+
+  <!-- image -->
+  <dimen name="image_width">75dp</dimen>
+  <dimen name="image_height">75dp</dimen>
+
+  <!-- submission item -->
+  <dimen name="submission_item_horiz_padding">8dp</dimen>
+  <dimen name="submission_item_title_size">24sp</dimen>
+  <dimen name="submission_item_text_size">18sp</dimen>
+  <dimen name="submission_item_padding_start">12dp</dimen>
+  <dimen name="submission_item_padding_top">4dp</dimen>
+  <dimen name="submission_item_padding_bottom">4dp</dimen>
+  <dimen name="submission_item_comment_icon_padding">96dp</dimen>
+
+  <!-- submission detail -->
+  <dimen name="submission_detail_text_size">18sp</dimen>
+  <dimen name="submission_detail_title_size">24sp</dimen>
+  <dimen name="submission_detail_padding_start">12dp</dimen>
+  <dimen name="submission_detail_padding_end">12dp</dimen>
+  <dimen name="submission_detail_padding_top">8dp</dimen>
+  <dimen name="submission_detail_padding_bottom">4dp</dimen>
+  <dimen name="submission_detail_arrow_padding">4dp</dimen>
+  <dimen name="submission_detail_score_padding">4dp</dimen>
+
+  <!-- comment -->
+  <dimen name="comment_text_size">16sp</dimen>
+  <dimen name="comment_padding_top">8dp</dimen>
+  <dimen name="comment_padding_bottom">8dp</dimen>
+  <dimen name="comment_padding_start">24dp</dimen>
+  <dimen name="comment_padding_end">24dp</dimen>
+
+  <!-- subreddit -->
+  <dimen name="subreddit_item_layout_height">48dp</dimen>
+  <dimen name="subreddit_item_text_size">20sp</dimen>
+  <dimen name="subreddit_item_padding_start">16dp</dimen>
+
+  <!-- nav header -->
+  <dimen name="nav_header_text_size">24sp</dimen>
+  <dimen name="nav_header_padding">20dp</dimen>
+  <dimen name="nav_header_padding_bottom">20dp</dimen>
+
+</resources>

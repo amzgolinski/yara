@@ -1,0 +1,247 @@
+<resources>
+
+
+  <!-- Base application theme. -->
+  <style name="Theme.Yara.Light" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryDark">@color/primaryDark</item>
+    <item name="colorAccent">@color/accent</item>
+    <item name="android:textColor">@android:color/black</item>
+    <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
+  </style>
+
+  <style name="Theme.Yara.Light.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
+  <style name="Theme.Yara.Light.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+  <style name="Theme.Yara.Light.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+  <!-- submission list image -->
+  <style name="image">
+    <item name="android:layout_width">@dimen/image_width</item>
+    <item name="android:layout_height">@dimen/image_height</item>
+    <item name="android:adjustViewBounds">true</item>
+    <item name="android:layout_gravity">start</item>
+    <item name="android:scaleType">centerCrop</item>
+  </style>
+
+  <!-- submission list subreddit name -->
+  <style name="submission_item_subreddit">
+    <item name="android:textSize">@dimen/submission_item_text_size</item>
+    <item name="android:paddingBottom">@dimen/submission_item_padding_bottom</item>
+    <item name="android:paddingStart">@dimen/submission_item_padding_start</item>
+  </style>
+
+  <!-- submission list subreddit name -->
+  <style name="submission_item_title">
+    <item name="android:textSize">@dimen/submission_item_title_size</item>
+    <item name="android:paddingBottom">@dimen/submission_item_padding_bottom</item>
+    <item name="android:paddingStart">@dimen/submission_item_padding_start</item>
+  </style>
+
+  <!-- submission list subreddit comment count -->
+  <style name="submission_item_comments">
+    <item name="android:textSize">@dimen/submission_item_text_size</item>
+    <item name="android:paddingBottom">@dimen/submission_item_padding_bottom</item>
+    <item name="android:paddingStart">@dimen/submission_item_detail_padding_start</item>
+    <item name="android:paddingTop">@dimen/submission_item_padding_top</item>
+  </style>
+
+  <!-- submission list subreddit score -->
+  <style name="submission_item_score">
+    <item name="android:textSize">@dimen/submission_item_text_size</item>
+    <item name="android:textColor">@color/accent</item>
+    <item name="android:paddingStart">@dimen/submission_item_detail_padding_start</item>
+    <item name="android:layout_gravity">center_vertical</item>
+  </style>
+
+  <!-- submission list comment icon -->
+  <style name="submission_item_comment_icon">
+    <item name="android:paddingStart">@dimen/submission_item_comment_icon_padding</item>
+    <item name="android:layout_gravity">center_vertical</item>
+  </style>
+
+  <!-- submission list comment icon -->
+  <style name="submission_item_detail_icon">
+    <item name="android:paddingStart">@dimen/submission_item_detail_padding_start</item>
+    <item name="android:layout_gravity">center_vertical</item>
+  </style>
+
+
+
+  <!-- submission detail subreddit name -->
+  <style name="submission_detail_subreddit">
+    <item name="android:textSize">@dimen/submission_detail_text_size</item>
+    <item name="android:paddingTop">@dimen/submission_detail_padding_top</item>
+    <item name="android:paddingBottom">@dimen/submission_detail_padding_bottom</item>
+    <item name="android:paddingStart">@dimen/submission_detail_padding_start</item>
+  </style>
+
+  <!-- submission detail author -->
+  <style name="submission_detail_author">
+    <item name="android:textSize">@dimen/submission_detail_text_size</item>
+    <item name="android:paddingTop">@dimen/submission_detail_padding_top</item>
+    <item name="android:paddingBottom">@dimen/submission_detail_padding_bottom</item>
+    <item name="android:paddingStart">@dimen/submission_detail_padding_start</item>
+    <item name="android:textStyle">italic</item>
+  </style>
+
+  <!-- submission detail title -->
+  <style name="submission_detail_title">
+    <item name="android:textSize">@dimen/submission_detail_title_size</item>
+    <item name="android:paddingBottom">@dimen/submission_detail_padding_bottom</item>
+    <item name="android:paddingTop">@dimen/submission_detail_padding_top</item>
+    <item name="android:paddingStart">@dimen/submission_detail_padding_start</item>
+    <item name="android:paddingEnd">@dimen/submission_detail_padding_end</item>
+    <item name="android:textColor">@android:color/black</item>
+  </style>
+
+  <!-- submission detail text -->
+  <style name="submission_detail_text">
+    <item name="android:textSize">@dimen/submission_detail_text_size</item>
+    <item name="android:paddingBottom">@dimen/submission_detail_padding_bottom</item>
+    <item name="android:paddingTop">@dimen/submission_detail_padding_top</item>
+    <item name="android:paddingStart">@dimen/submission_detail_padding_start</item>
+    <item name="android:paddingEnd">@dimen/submission_detail_padding_end</item>
+    <item name="android:textColor">@android:color/black</item>
+  </style>
+
+  <!-- submission detail comment icon -->
+  <style name="submission_detail_comment_icon">
+    <item name="android:paddingStart">@dimen/submission_detail_padding_start</item>
+  </style>
+
+  <!-- submission detail comment count -->
+  <style name="submission_detail_comment_count">
+    <item name="android:textSize">@dimen/submission_detail_text_size</item>
+    <item name="android:paddingStart">@dimen/submission_detail_padding_start</item>
+  </style>
+
+  <!-- submission detail score -->
+  <style name="submission_detail_score">
+    <item name="android:textSize">@dimen/submission_detail_text_size</item>
+    <item name="android:paddingTop">@dimen/submission_detail_padding_top</item>
+    <item name="android:paddingBottom">@dimen/submission_detail_padding_bottom</item>
+    <item name="android:paddingEnd">@dimen/submission_detail_score_padding</item>
+    <item name="android:paddingStart">@dimen/submission_detail_score_padding</item>
+    <item name="android:layout_centerVertical">true</item>
+    <item name="android:textColor">@color/accent</item>
+  </style>
+
+  <!-- submission detail arrow icons -->
+  <style name="submission_detail_arrow_icons">
+    <item name="android:paddingStart">@dimen/submission_detail_arrow_padding</item>
+    <item name="android:paddingEnd">@dimen/submission_detail_arrow_padding</item>
+    <item name="android:layout_centerVertical">true</item>
+  </style>
+
+  <!-- comment author -->
+  <style name="comment_author">
+    <item name="android:textSize">@dimen/comment_text_size</item>
+    <item name="android:paddingTop">@dimen/comment_padding_top</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+
+  <!-- comment text -->
+  <style name="comment_text">
+    <item name="android:textSize">@dimen/comment_text_size</item>
+    <item name="android:paddingTop">@dimen/comment_padding_top</item>
+    <item name="android:paddingBottom">@dimen/comment_padding_bottom</item>
+    <item name="android:paddingStart">@dimen/comment_padding_start</item>
+    <item name="android:paddingEnd">@dimen/comment_padding_end</item>
+    <item name="android:textColor">@android:color/black</item>
+  </style>
+
+  <!-- more comments text -->
+  <style name="comment_more_comments">
+    <item name="android:textSize">@dimen/comment_text_size</item>
+    <item name="android:paddingTop">@dimen/comment_padding_top</item>
+    <item name="android:paddingBottom">@dimen/comment_padding_bottom</item>
+    <item name="android:textColor">@color/accent</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+
+  <!-- divider -->
+  <style name="Divider">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">2dp</item>
+    <item name="android:layout_marginTop">16dp</item>
+    <item name="android:layout_marginBottom">8dp</item>
+    <item name="android:background">?android:attr/listDivider</item>
+  </style>
+
+  <!-- widget -->
+  <style name="empty_widget">
+    <item name="android:gravity">center</item>
+    <item name="android:textColor">@android:color/white</item>
+    <item name="android:textSize">18sp</item>
+    <item name="android:textAppearance">?android:textAppearanceLarge</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+
+  <!-- widget item title -->
+  <style name="widget_item_title">
+    <item name="android:textSize">@dimen/widget_title_text_size</item>
+    <item name="android:textStyle">bold|italic</item>
+    <item name="android:layout_marginStart">@dimen/widget_margin</item>
+  </style>
+
+  <!-- widget item detail -->
+  <style name="widget_item_detail">
+    <item name="android:textSize">@dimen/widget_detail_text_size</item>
+    <item name="android:layout_marginStart">@dimen/widget_margin</item>
+    <item name="android:layout_marginTop">@dimen/widget_detail_margin_top</item>
+  </style>
+
+  <!-- subreddit item -->
+  <style name="subreddit_name">
+    <item name="android:textSize">@dimen/subreddit_item_text_size</item>
+    <item name="android:paddingStart">@dimen/subreddit_item_padding_start</item>
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style name="subreddit_checkbox">
+    <item name="android:layout_marginEnd">@dimen/subreddit_item_check_margin_end</item>
+  </style>
+
+  <!-- nav header -->
+  <style name="nav_header">
+    <item name="android:textSize">@dimen/nav_header_text_size</item>
+    <item name="android:textColor">@android:color/white</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:paddingStart">@dimen/nav_header_padding</item>
+    <item name="android:paddingEnd">@dimen/nav_header_padding</item>
+    <item name="android:paddingBottom">@dimen/nav_header_padding_bottom</item>
+
+  </style>
+
+  <!-- accounts -->
+  <style name="account">
+    <item name="android:tint">@color/accent</item>
+    <item name="android:paddingStart">@dimen/account_padding</item>
+    <item name="android:paddingEnd">@dimen/account_padding</item>
+    <item name="android:gravity">center_vertical</item>
+  </style>
+
+  <style name="account_name" parent="account">
+    <item name="android:textSize">@dimen/account_name_text_size</item>
+  </style>
+
+  <style name="account_delete">
+    <item name="android:background">@android:color/transparent</item>
+    <item name="android:gravity">center_vertical</item>
+  </style>
+
+  <style name="account_add">
+    <item name="android:background">@android:color/transparent</item>
+    <item name="android:paddingStart">@dimen/account_add_padding</item>
+    <item name="android:paddingEnd">@dimen/account_add_padding</item>
+  </style>
+
+
+
+</resources>

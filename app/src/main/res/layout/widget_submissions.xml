@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="4dp">
+
+  <FrameLayout
+      android:id="@+id/widget"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/abc_action_bar_default_height_material"
+      android:background="@color/primary">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:contentDescription="@string/app_name"
+        android:src="@mipmap/ic_launcher"/>
+
+  </FrameLayout>
+
+  <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:background="@android:color/white">
+
+    <ListView android:id="@+id/widget_submission_list"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:loopViews="true"/>
+
+    <TextView android:id="@+id/empty_view"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              style="@style/empty_widget"
+              android:text="@string/empty_view_text"/>
+  </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.amzgolinski.yara.activity.SubredditActivity">
+
+  <item android:id="@+id/action_refresh"
+        android:title="@string/action_refresh"
+        android:icon="@drawable/ic_refresh_white_24dp"
+        app:showAsAction="always"/>
+
+  <item android:id="@+id/action_save"
+        android:title="@string/action_save"
+        android:icon="@drawable/ic_save_white_24dp"
+        app:showAsAction="always"/>
+
+</menu>

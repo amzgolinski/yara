@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:elevation="36dp"
+              android:orientation="vertical"
+              android:padding="8dp">
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/submission_detail_subreddit_name"
+        style="@style/submission_detail_subreddit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/submission_detail_author"
+        style="@style/submission_detail_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/submission_detail_subreddit_name"/>
+  </RelativeLayout>
+
+  <TextView
+      android:id="@+id/submission_detail_title"
+      style="@style/submission_detail_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+
+  <TextView
+      android:id="@+id/submission_detail_text"
+      style="@style/submission_detail_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/submission_detail_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_forum_white_36dp"/>
+  </FrameLayout>
+
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:paddingTop="4dp">
+
+    <ImageView
+        android:id="@+id/comment_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        style="@style/submission_detail_comment_icon"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_comment_black_24dp"/>
+
+    <TextView
+        android:id="@+id/submission_detail_comments"
+        style="@style/submission_detail_comment_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/comment_icon"/>
+
+    <RelativeLayout
+        android:id="@+id/score_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true">
+
+      <ImageView
+          android:id="@+id/up_arrow"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          style="@style/submission_detail_arrow_icons"
+          android:src="@drawable/ic_arrow_upward_black_24dp"/>
+
+      <TextView
+          android:id="@+id/submission_detail_score"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_toEndOf="@+id/up_arrow"
+          style="@style/submission_detail_score"/>
+
+      <ImageView
+          android:id="@+id/down_arrow"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_toEndOf="@+id/submission_detail_score"
+          style="@style/submission_detail_arrow_icons"
+          android:src="@drawable/ic_arrow_downward_black_24dp"/>
+
+    </RelativeLayout>
+
+  </RelativeLayout>
+
+</LinearLayout>

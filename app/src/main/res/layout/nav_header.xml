@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:fitsSystemWindows="true"
+                android:background="@color/primaryDark"
+                android:orientation="vertical">
+
+  <TextView
+      android:id="@+id/reddit_username"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      style="@style/nav_header"/>
+
+</RelativeLayout>

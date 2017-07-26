@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <color name="gray_200">#eeeeee</color>
+  <color name="gray_300">#e0e0e0</color>
+  <color name="gray_700">#616161</color>
+  <color name="gray_800">#424242</color>
+
+  <color name="primary">#00acc1</color>
+  <color name="primaryDark">#006064</color>
+  <color name="primaryLight">#4dd0e1</color>
+  <color name="accent">#e53935</color>
+
+  <color name="black">#000000</color>
+
+</resources>

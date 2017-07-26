@@ -1,0 +1,86 @@
+<resources>
+  <!-- application strings -->
+  <string name="app_name">YARA</string>
+  <string name="redirect_url">https://github.com/amzgolinski/udacity-capstone</string>
+
+  <!-- Navigation drawer strings -->
+  <string name="drawer_open">Open navigation drawer</string>
+  <string name="drawer_close">Close navigation drawer</string>
+  <string name="accounts_drawer_title">Accounts</string>
+  <string name="subscriptions_drawer_title">Subreddits</string>
+
+  <!-- Activity titles -->
+  <string name="title_activity_subreddit">Subreddits</string>
+  <string name="title_login_activity">Login to Reddit</string>
+  <string name="title_activity_accounts">Reddit Accounts</string>
+  <string name="title_activity_submit_comment">Post Comment</string>
+
+  <!-- SharedPreferences keys -->
+  <string name="accounts_key">accounts</string>
+  <string name="current_user_key">current_user</string>
+  <string name="logged_in">logged_in</string>
+  <string name="sync_status_key">sync_status</string>
+  <string name="refresh_status_key">refresh_status</string>
+
+  <string name="share_text">"Check out this Reddit post: </string>
+  <string name="reddit_username_hint">Reddit User</string>
+  <string name="add_user_title">Reddit Username</string>
+
+  <string name="dialog_add_user_button">Add</string>
+  <string name="dialog_cancel_button">Cancel</string>
+  <string name="dialog_add_user_title">Enter Reddit username</string>
+
+  <!-- Content descriptions -->
+  <string name="add_account">Add Account</string>
+  <string name="delete_account">Delete Account</string>
+
+  <!-- submission item strings -->
+  <string name="submission_id">submission_id</string>
+  <string name="vote">vote</string>
+  <string name="score">score</string>
+
+  <!-- display string -->
+  <string name="submissions_loading">Loading...</string>
+  <string name="subreddit_name">/r/%1$s</string>
+  <string name="submission_comment_count">%1$d comment(s)</string>
+  <string name="more_comments">(%1$d) more comments</string>
+  <string name="add_account_prompt">Please add an account.</string>
+  <string name="press_allow">You must press \'allow\' to log in with this account</string>
+  <string name="refreshing">Refreshing...</string>
+  <string name="saving">Saving...</string>
+
+  <!-- menu actions -->
+  <string name="action_share">Share</string>
+  <string name="action_refresh">Refresh</string>
+  <string name="action_settings">Settings</string>
+  <string name="action_save">Save</string>
+
+  <!-- firebase -->
+  <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+  <string name="pub_id">"ca-app-pub-3940256099942544~3347511713"</string>
+
+  <!-- Sync Adapter -->
+  <string name="sync_account_type">yara.amzgolinski.com</string>
+  <string name="content_authority">com.amzgolinski.yara.provider</string>
+
+  <!-- widget strings -->
+  <string name="empty_view_text">There is no data to display.</string>
+  <string name="appwidget_text_detail">%1$s\t-\t%2$d</string>
+  <string name="appwidget_text">Yara</string>
+
+  <!-- firebase strings -->
+  <string name="location_detail">detail</string>
+  <string name="location_list">list</string>
+
+  <!-- error messages -->
+  <string name="error_network_exception">There was an error processing your request.</string>
+  <string name="error_no_internet">No Internet access.</string>
+  <string name="error_no_subreddits">You are currently not subscribed to any subreddits.</string>
+  <string name="error_api_exception">
+    There was an Reddit API error.  Please try again later.
+  </string>
+  <string name="error_auth_exception">There was a problem with authentication.</string>
+
+  <!-- -->
+
+</resources>

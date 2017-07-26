@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1094782769838",
+    "firebase_url": "https://amzgolinski-capstone.firebaseio.com",
+    "project_id": "amzgolinski-capstone",
+    "storage_bucket": "amzgolinski-capstone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094782769838:android:12fc05fe8e429648",
+        "android_client_info": {
+          "package_name": "com.amzgolinski.yara"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094782769838-1a1cmno2avgm1no1511m2k89cltl7bvo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClgLrhc_nuCzoH_ms2tF5_VWRcIU_TraI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
