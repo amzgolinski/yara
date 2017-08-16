@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +17,8 @@ import com.amzgolinski.yara.R;
 import com.amzgolinski.yara.callbacks.AccountRetrievedCallback;
 import com.amzgolinski.yara.service.YaraUtilityService;
 import com.amzgolinski.yara.sync.SubredditSyncAdapter;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.RedditUtils;
+import com.amzgolinski.yara.util.AndroidUtils;
 
 import net.dean.jraw.auth.AuthenticationManager;
 import net.dean.jraw.auth.AuthenticationState;
@@ -126,9 +126,9 @@ public class SubmissionListActivity extends AppCompatActivity
   protected void onResume() {
     super.onResume();
 
-    if (Utils.isLoggedIn(this)) {
+    if (RedditUtils.isLoggedIn(this)) {
       AuthenticationState state = AuthenticationManager.get().checkAuthState();
-      Utils.updateAuth(this, state, this);
+      RedditUtils.updateAuth(this, state, this);
     } else {
       mEmpty.setText(getResources().getString(R.string.add_account_prompt));
       mEmpty.setVisibility(View.VISIBLE);
@@ -158,12 +158,12 @@ public class SubmissionListActivity extends AppCompatActivity
       SubredditSyncAdapter.syncImmediately(this);
       configureUser(account);
     } else {
-      Utils.handleError(this, message);
+      AndroidUtils.handleError(this, message);
     }
   }
 
   private void configureUser(LoggedInAccount account) {
-    Utils.setCurrentUser(this, account.getFullName());
+    RedditUtils.setCurrentUser(this, account.getFullName());
     NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
     navigationView.setNavigationItemSelectedListener(this);
     View header = navigationView.getHeaderView(0);

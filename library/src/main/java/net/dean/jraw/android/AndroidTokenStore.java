@@ -2,7 +2,6 @@ package net.dean.jraw.android;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import net.dean.jraw.auth.NoSuchTokenException;
 import net.dean.jraw.auth.TokenStore;

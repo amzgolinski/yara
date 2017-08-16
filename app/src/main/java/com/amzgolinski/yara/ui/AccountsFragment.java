@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,8 @@ import android.widget.TextView;
 import com.amzgolinski.yara.R;
 import com.amzgolinski.yara.activity.LoginActivity;
 import com.amzgolinski.yara.service.YaraUtilityService;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.RedditUtils;
+import com.amzgolinski.yara.util.AndroidUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,9 +80,9 @@ public class AccountsFragment extends Fragment {
   @Override
   public void onViewCreated(View view, Bundle savedInstanceState) {
     final Context context = this.getContext();
-    if (Utils.isLoggedIn(context)) {
+    if (RedditUtils.isLoggedIn(context)) {
 
-      mUsername = Utils.getCurrentUser(context);
+      mUsername = RedditUtils.getCurrentUser(context);
       mAccountName.setText(mUsername);
 
       mDeleteButton.setOnClickListener(new View.OnClickListener() {
@@ -107,12 +107,12 @@ public class AccountsFragment extends Fragment {
       mAddAccountButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-          if (Utils.isNetworkAvailable(getContext())) {
+          if (AndroidUtils.isNetworkAvailable(getContext())) {
             CookieManager cookieManager = CookieManager.getInstance();
             cookieManager.removeAllCookie();
             startActivity(new Intent(context, LoginActivity.class));
           } else {
-            Utils.showToast(
+            AndroidUtils.showToast(
                 getContext(),
                 getContext().getResources().getString(R.string.error_no_internet)
             );

@@ -14,21 +14,24 @@
         android:id="@+id/submission_detail_subreddit_name"
         style="@style/submission_detail_subreddit"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="/r/awww"/>
 
     <TextView
         android:id="@+id/submission_detail_author"
         style="@style/submission_detail_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/submission_detail_subreddit_name"/>
+        android:layout_toEndOf="@+id/submission_detail_subreddit_name"
+        android:text="ReverseCommute"/>
   </RelativeLayout>
 
   <TextView
       android:id="@+id/submission_detail_title"
       style="@style/submission_detail_title"
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
+      android:layout_height="wrap_content"
+      android:text="This is the title of the post.  Hello."/>
 
   <TextView
       android:id="@+id/submission_detail_text"
@@ -70,7 +73,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/comment_icon"/>
+        android:layout_toEndOf="@+id/comment_icon"
+        android:text="45"/>
 
     <RelativeLayout
         android:id="@+id/score_container"
@@ -83,14 +87,15 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           style="@style/submission_detail_arrow_icons"
-          android:src="@drawable/ic_arrow_upward_black_24dp"/>
+          android:src="@drawable/ic_arrow_up_bold_grey600_24dp"/>
 
       <TextView
           android:id="@+id/submission_detail_score"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_toEndOf="@+id/up_arrow"
-          style="@style/submission_detail_score"/>
+          style="@style/submission_detail_score"
+          android:text="7654321"/>
 
       <ImageView
           android:id="@+id/down_arrow"
@@ -98,7 +103,7 @@
           android:layout_height="match_parent"
           android:layout_toEndOf="@+id/submission_detail_score"
           style="@style/submission_detail_arrow_icons"
-          android:src="@drawable/ic_arrow_downward_black_24dp"/>
+          android:src="@drawable/ic_arrow_down_bold_grey600_24dp"/>
 
     </RelativeLayout>
 

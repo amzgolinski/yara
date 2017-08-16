@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,10 +22,13 @@ import com.amzgolinski.yara.callbacks.RedditDownloadCallback;
 import com.amzgolinski.yara.data.RedditContract;
 import com.amzgolinski.yara.service.YaraUtilityService;
 import com.amzgolinski.yara.ui.SubmissionListFragment;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.RedditUtils;
+import com.amzgolinski.yara.util.StringUtils;
 import com.squareup.picasso.Picasso;
 
 import net.dean.jraw.models.VoteDirection;
+
+import static android.view.View.GONE;
 
 
 public class SubmissionListAdapter extends RecyclerView.Adapter<SubmissionListAdapter.ViewHolder> {
@@ -83,11 +88,11 @@ public class SubmissionListAdapter extends RecyclerView.Adapter<SubmissionListAd
 
         // up vote
         ImageView upArrowView = (ImageView) view.findViewById(R.id.submission_item_up_arrow);
-        Drawable upArrow = context.getDrawable(R.drawable.ic_arrow_upward_black_24dp);
+        Drawable upArrow = context.getDrawable(R.drawable.ic_arrow_up_bold_grey600_24dp);
         if (vote == VoteDirection.UPVOTE.getValue()) {
-          upArrow.setTint(context.getColor(R.color.accent));
+          upArrow.setTint(ContextCompat.getColor(context, R.color.accent));
         } else {
-          upArrow.setTint(context.getColor(R.color.black));
+          upArrow.setTint(ContextCompat.getColor(context, R.color.gray_600 ));
         }
         upArrowView.setImageDrawable(upArrow);
         upArrowView.setTag(R.string.submission_id, submissionId);
@@ -97,17 +102,17 @@ public class SubmissionListAdapter extends RecyclerView.Adapter<SubmissionListAd
           public void onClick(View v) {
             long submissionId = Long.parseLong((String)v.getTag(R.string.submission_id));
             int vote = (Integer) v.getTag(R.string.vote);
-            YaraUtilityService.submitVote(mContext, submissionId, vote, Utils.UPVOTE);
+            YaraUtilityService.submitVote(mContext, submissionId, vote, RedditUtils.UPVOTE);
           }
         });
 
         // down vote
         ImageView downArrowView = (ImageView) view.findViewById(R.id.submission_item_down_arrow);
-        Drawable downArrow = context.getDrawable(R.drawable.ic_arrow_downward_black_24dp);
+        Drawable downArrow = context.getDrawable(R.drawable.ic_arrow_down_bold_grey600_24dp);
         if (vote == VoteDirection.DOWNVOTE.getValue()) {
-          downArrow.setTint(context.getColor(R.color.accent));
+          downArrow.setTint(ContextCompat.getColor(context, R.color.accent));
         } else {
-          downArrow.setTint(context.getColor(R.color.black));
+          downArrow.setTint(ContextCompat.getColor(context, R.color.gray_600));
         }
         downArrowView.setImageDrawable(downArrow);
         downArrowView.setTag(R.string.submission_id, submissionId);
@@ -117,24 +122,26 @@ public class SubmissionListAdapter extends RecyclerView.Adapter<SubmissionListAd
           public void onClick(View v) {
             long submissionId = Long.parseLong((String)v.getTag(R.string.submission_id));
             int vote = (Integer) v.getTag(R.string.vote);
-            YaraUtilityService.submitVote(mContext, submissionId, vote, Utils.DOWNVOTE);
+            YaraUtilityService.submitVote(mContext, submissionId, vote, RedditUtils.DOWNVOTE);
           }
         });
 
         String thumbnail = cursor.getString(SubmissionListFragment.COL_THUMBNAIL);
         ImageView thumbnailView = (ImageView) view.findViewById(R.id.submission_item_thumbnail);
-        if (!Utils.isStringEmpty(thumbnail)) {
-
+        if (!StringUtils.isStringEmpty(thumbnail)) {
           Picasso.with(context)
               .load(thumbnail)
               .error(R.drawable.ic_do_not_distrub_black_24dp)
               .into(thumbnailView);
         } else {
-
+          FrameLayout layout = (FrameLayout) view.findViewById(R.id.thumbnail_container);
+          layout.setVisibility(GONE);
+          /*
           Drawable forum
               = mContext.getResources().getDrawable(R.drawable.ic_forum_white_36dp, null);
-          forum.setTint(mContext.getColor(R.color.gray_300));
+          forum.setTint(ContextCompat.getColor(mContext,R.color.gray_300));
           thumbnailView.setImageDrawable(forum);
+          */
         }
       }
     };

@@ -27,7 +27,7 @@ import com.amzgolinski.yara.callbacks.RedditDownloadCallback;
 import com.amzgolinski.yara.data.RedditContract;
 import com.amzgolinski.yara.service.YaraUtilityService;
 import com.amzgolinski.yara.tasks.FetchSubredditsTask;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.AndroidUtils;
 
 import java.util.ArrayList;
 
@@ -69,7 +69,7 @@ public class SubredditFragment extends Fragment
 
         boolean status = intent.getBooleanExtra(YaraUtilityService.PARAM_STATUS, true);
         if (!status) {
-          Utils.handleError(context, intent.getStringExtra(YaraUtilityService.PARAM_MESSAGE));
+          AndroidUtils.handleError(context, intent.getStringExtra(YaraUtilityService.PARAM_MESSAGE));
         } else {
           restartLoader();
         }
@@ -148,7 +148,7 @@ public class SubredditFragment extends Fragment
   public boolean onOptionsItemSelected(MenuItem item) {
     Log.d(LOG_TAG, "onOptionsItemSelected");
     // Handle item selection
-    boolean isNetworkAvailable = Utils.isNetworkAvailable(getContext());
+    boolean isNetworkAvailable = AndroidUtils.isNetworkAvailable(getContext());
     String msg = getContext().getResources().getString(R.string.error_no_internet);
 
     switch (item.getItemId()) {
@@ -161,12 +161,12 @@ public class SubredditFragment extends Fragment
               if (message.equals(YaraUtilityService.STATUS_OK)) {
                 restartLoader();
               } else {
-                Utils.handleError(getContext(), message);
+                AndroidUtils.handleError(getContext(), message);
               }
             }
           }).execute();
         }
-        Utils.showToast(getContext(), msg);
+        AndroidUtils.showToast(getContext(), msg);
         return true;
       case R.id.action_save:
         if (isNetworkAvailable) {
@@ -177,7 +177,7 @@ public class SubredditFragment extends Fragment
             getActivity().onBackPressed();
           }
         }
-        Utils.showToast(getContext(), msg);
+        AndroidUtils.showToast(getContext(), msg);
         return true;
       default:
         return super.onOptionsItemSelected(item);

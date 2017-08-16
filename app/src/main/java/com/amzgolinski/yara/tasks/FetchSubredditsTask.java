@@ -27,7 +27,8 @@ import com.amzgolinski.yara.data.RedditContract.SubredditsEntry;
 import com.amzgolinski.yara.data.RedditContract.SubmissionsEntry;
 import com.amzgolinski.yara.service.YaraUtilityService;
 import com.amzgolinski.yara.sync.SubredditSyncAdapter;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.RedditUtils;
+import com.amzgolinski.yara.util.AndroidUtils;
 
 
 public class FetchSubredditsTask extends AsyncTask<Void, Void, HashMap<String, Subreddit>> {
@@ -46,7 +47,7 @@ public class FetchSubredditsTask extends AsyncTask<Void, Void, HashMap<String, S
   public HashMap<String, Subreddit> doInBackground(Void... params) {
     HashMap<String, Subreddit> latestSubreddits = new HashMap<>();
 
-    if (!Utils.isNetworkAvailable(mContext)) {
+    if (!AndroidUtils.isNetworkAvailable(mContext)) {
       mMessage = YaraUtilityService.STATUS_NO_INTERNET;
       return latestSubreddits;
     }
@@ -94,7 +95,7 @@ public class FetchSubredditsTask extends AsyncTask<Void, Void, HashMap<String, S
       ArrayList<Submission> toAdd = new ArrayList<>();
       for (Submission submission : submissions) {
         //Log.d(LOG_TAG, submission.toString());
-        if (Utils.isValidSubmission(submission)) {
+        if (RedditUtils.isValidSubmission(submission)) {
           toAdd.add(submission);
         }
       }
@@ -155,7 +156,10 @@ public class FetchSubredditsTask extends AsyncTask<Void, Void, HashMap<String, S
   private ContentValues subredditToValue(Subreddit subreddit) {
 
     ContentValues toReturn = new ContentValues();
-    toReturn.put(SubredditsEntry.COLUMN_SUBREDDIT_ID, Utils.redditIdToLong(subreddit.getId()));
+    toReturn.put(
+        SubredditsEntry.COLUMN_SUBREDDIT_ID,
+        RedditUtils.redditIdToLong(subreddit.getId())
+    );
     toReturn.put(SubredditsEntry.COLUMN_NAME, subreddit.getDisplayName());
     toReturn.put(SubredditsEntry.COLUMN_RELATIVE_LOCATION, subreddit.getRelativeLocation());
     toReturn.put(SubredditsEntry.COLUMN_TITLE, subreddit.getTitle());

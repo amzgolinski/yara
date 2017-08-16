@@ -12,23 +12,25 @@
   <dimen name="comment_padding">2dp</dimen>
 
   <!-- submission thumbnail -->
-  <dimen name="image_height">50dp</dimen>
-  <dimen name="image_width">50dp</dimen>
+  <dimen name="image_height">75dp</dimen>
+  <dimen name="image_width">75dp</dimen>
   <dimen name="image_margin_start">0dp</dimen>
 
   <!-- submission item -->
   <dimen name="submission_item_horiz_padding">8dp</dimen>
   <dimen name="submission_item_text_size">14sp</dimen>
-  <dimen name="submission_item_title_size">16sp</dimen>
+  <dimen name="submission_item_comment_text_size">14sp</dimen>
+  <dimen name="submission_item_count_text_size">14sp</dimen>
+  <dimen name="submission_item_title_size">18sp</dimen>
   <dimen name="submission_item_padding_start">12dp</dimen>
   <dimen name="submission_item_detail_padding_start">4dp</dimen>
   <dimen name="submission_item_padding_top">4dp</dimen>
   <dimen name="submission_item_padding_bottom">4dp</dimen>
-  <dimen name="submission_item_comment_icon_padding">71dp</dimen>
+  <dimen name="submission_item_comment_icon_padding">0dp</dimen>
 
   <!-- submission detail -->
-  <dimen name="submission_detail_text_size">12sp</dimen>
-  <dimen name="submission_detail_title_size">12sp</dimen>
+  <dimen name="submission_detail_text_size">14sp</dimen>
+  <dimen name="submission_detail_title_size">16sp</dimen>
   <dimen name="submission_detail_padding_start">12dp</dimen>
   <dimen name="submission_detail_padding_end">12dp</dimen>
   <dimen name="submission_detail_padding_top">8dp</dimen>

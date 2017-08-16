@@ -20,7 +20,8 @@ import android.util.Log;
 
 import com.amzgolinski.yara.R;
 import com.amzgolinski.yara.data.RedditContract;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.RedditUtils;
+import com.amzgolinski.yara.util.StringUtils;
 
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.auth.AuthenticationManager;
@@ -185,7 +186,7 @@ public class SubredditSyncAdapter extends AbstractThreadedSyncAdapter {
       ArrayList<Submission> toAdd = new ArrayList<>();
       for (Submission submission : submissions) {
         Log.d(LOG_TAG, submission.toString());
-        if (Utils.isValidSubmission(submission)) {
+        if (RedditUtils.isValidSubmission(submission)) {
           toAdd.add(submission);
         }
       }
@@ -220,9 +221,6 @@ public class SubredditSyncAdapter extends AbstractThreadedSyncAdapter {
     spe.commit();
   }
 
-  /**
-   *
-   */
   private void updateWidgets() {
     Context context = getContext();
     // Setting the package ensures that only components in our app will receive
@@ -230,10 +228,7 @@ public class SubredditSyncAdapter extends AbstractThreadedSyncAdapter {
     Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED)
         .setPackage(context.getPackageName());
     context.sendBroadcast(dataUpdatedIntent);
-
-
     LocalBroadcastManager.getInstance(getContext()).sendBroadcast(dataUpdatedIntent);
-
   }
 
   private int addSubmissions(ArrayList<Submission> submissions) {
@@ -280,11 +275,16 @@ public class SubredditSyncAdapter extends AbstractThreadedSyncAdapter {
   }
 
   private ContentValues subredditToValue(Subreddit subreddit) {
-
     ContentValues toReturn = new ContentValues();
-    toReturn.put(RedditContract.SubredditsEntry.COLUMN_SUBREDDIT_ID, Utils.redditIdToLong(subreddit.getId()));
+    toReturn.put(
+        RedditContract.SubredditsEntry.COLUMN_SUBREDDIT_ID,
+        RedditUtils.redditIdToLong(subreddit.getId())
+    );
     toReturn.put(RedditContract.SubredditsEntry.COLUMN_NAME, subreddit.getDisplayName());
-    toReturn.put(RedditContract.SubredditsEntry.COLUMN_RELATIVE_LOCATION, subreddit.getRelativeLocation());
+    toReturn.put(
+        RedditContract.SubredditsEntry.COLUMN_RELATIVE_LOCATION,
+        subreddit.getRelativeLocation()
+    );
     toReturn.put(RedditContract.SubredditsEntry.COLUMN_TITLE, subreddit.getTitle());
     toReturn.put(RedditContract.SubredditsEntry.COLUMN_SELECTED, "1");
     return toReturn;
@@ -292,12 +292,18 @@ public class SubredditSyncAdapter extends AbstractThreadedSyncAdapter {
 
   private ContentValues submissionToValue(Submission submission) {
     ContentValues toReturn = new ContentValues();
-    toReturn.put(RedditContract.SubmissionsEntry.COLUMN_SUBMISSION_ID, Utils.redditIdToLong(submission.getId()));
+    toReturn.put(
+        RedditContract.SubmissionsEntry.COLUMN_SUBMISSION_ID,
+        RedditUtils.redditIdToLong(submission.getId())
+    );
     toReturn.put(
         RedditContract.SubmissionsEntry.COLUMN_SUBREDDIT_ID,
-        Utils.redditParentIdToLong(submission.getSubredditId())
+        RedditUtils.redditParentIdToLong(submission.getSubredditId())
     );
-    toReturn.put(RedditContract.SubmissionsEntry.COLUMN_SUBREDDIT_NAME, submission.getSubredditName());
+    toReturn.put(
+        RedditContract.SubmissionsEntry.COLUMN_SUBREDDIT_NAME,
+        submission.getSubredditName()
+    );
     toReturn.put(RedditContract.SubmissionsEntry.COLUMN_AUTHOR, submission.getAuthor());
     toReturn.put(
         RedditContract.SubmissionsEntry.COLUMN_TITLE,
@@ -306,14 +312,14 @@ public class SubredditSyncAdapter extends AbstractThreadedSyncAdapter {
     toReturn.put(RedditContract.SubmissionsEntry.COLUMN_URL, submission.getUrl());
     toReturn.put(RedditContract.SubmissionsEntry.COLUMN_COMMENT_COUNT, submission.getCommentCount());
     toReturn.put(RedditContract.SubmissionsEntry.COLUMN_SCORE, submission.getScore());
-    int readOnly = (Utils.isSubmissionReadOnly(submission) ? 1 : 0);
+    int readOnly = (RedditUtils.isSubmissionReadOnly(submission) ? 1 : 0);
     toReturn.put(RedditContract.SubmissionsEntry.COLUMN_IS_READ_ONLY, readOnly);
     toReturn.put(RedditContract.SubmissionsEntry.COLUMN_THUMBNAIL, submission.getThumbnail());
 
     String selfText = submission.data("selftext_html");
-    if (!Utils.isStringEmpty(selfText)) {
+    if (!StringUtils.isStringEmpty(selfText)) {
       selfText = StringEscapeUtils.unescapeHtml4(selfText);
-      selfText = Utils.removeHtmlSpacing(selfText);
+      selfText = StringUtils.removeHtmlSpacing(selfText);
     }
     toReturn.put(RedditContract.SubmissionsEntry.COLUMN_TEXT, selfText);
     toReturn.put(RedditContract.SubmissionsEntry.COLUMN_VOTE, submission.getVote().getValue());

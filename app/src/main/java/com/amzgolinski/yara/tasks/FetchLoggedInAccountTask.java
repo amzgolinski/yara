@@ -6,7 +6,8 @@ import android.util.Log;
 
 import com.amzgolinski.yara.callbacks.AccountRetrievedCallback;
 import com.amzgolinski.yara.service.YaraUtilityService;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.RedditUtils;
+import com.amzgolinski.yara.util.AndroidUtils;
 
 import net.dean.jraw.auth.AuthenticationManager;
 import net.dean.jraw.http.NetworkException;
@@ -30,13 +31,13 @@ public class FetchLoggedInAccountTask extends AsyncTask<Void, Void, LoggedInAcco
   protected LoggedInAccount doInBackground(Void... params) {
     mMessage = YaraUtilityService.STATUS_OK;
     LoggedInAccount account = null;
-    if (!Utils.isNetworkAvailable(mContext)) {
+    if (!AndroidUtils.isNetworkAvailable(mContext)) {
       mMessage = YaraUtilityService.STATUS_NO_INTERNET;
       return null;
     }
     try {
       account = AuthenticationManager.get().getRedditClient().me();
-      Utils.setCurrentUser(mContext, account.getFullName());
+      RedditUtils.setCurrentUser(mContext, account.getFullName());
     } catch (NetworkException networkException) {
       Log.e(LOG_TAG, "NetworkException", networkException);
       mMessage = YaraUtilityService.STATUS_AUTH_EXCEPTION;

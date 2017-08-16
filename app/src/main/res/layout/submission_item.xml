@@ -1,109 +1,249 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+  <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="10dp"
-    android:paddingTop="10dp">
-
-  <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:paddingEnd="@dimen/submission_item_horiz_padding"
-      android:paddingStart="@dimen/submission_item_horiz_padding">
-
-    <FrameLayout
-        android:id="@+id/thumbnail_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-      <ImageView
-          android:id="@+id/submission_item_thumbnail"
-          style="@style/image"
-          android:src="@drawable/ic_do_not_distrub_black_24dp"
-          android:transitionName="image"/>
-    </FrameLayout>
-
-
-    <TextView
-        android:id="@+id/submission_item_subreddit"
-        style="@style/submission_item_subreddit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/thumbnail_container"
-        android:text="r/todayilearned"/>
-
-    <TextView
-        android:id="@+id/submission_item_author"
-        style="@style/submission_item_subreddit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/submission_item_subreddit"
-        android:textStyle="italic"/>
-
-    <TextView
-        android:id="@+id/submission_item_title"
-        style="@style/submission_item_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/submission_item_subreddit"
-        android:layout_toEndOf="@id/thumbnail_container"/>
-
-
-  </RelativeLayout>
-
-  <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="36dp"
-      android:layout_marginTop="8dp">
-
-    <ImageView
-        android:id="@+id/submission_item_icon_comment"
-        style="@style/submission_item_comment_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_comment_black_24dp" />
-
-    <TextView
-        android:id="@+id/submission_item_comments"
-        style="@style/submission_item_comments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/submission_item_icon_comment"
-        android:text="12345" />
+    android:padding="16dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+      android:id="@+id/submission_info"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <TextView
+        android:id="@+id/submission_item_subreddit"
+        style="@style/submission_item_subreddit"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@id/submission_item_comments"
-        android:gravity="end"
-        android:orientation="horizontal">
+        android:layout_weight=".5"
+        android:gravity="center"
+        android:text="r/todayilearned"/>
+
+      <TextView
+        android:id="@+id/submission_item_author"
+        style="@style/submission_item_subreddit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
+        android:gravity="center"
+        android:text="/u/blahblah"
+        android:textStyle="italic"/>
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/submission_content"
+      android:layout_width="match_parent"
+      android:layout_below="@+id/submission_info"
+      android:layout_height="wrap_content">
+
+    <FrameLayout
+      android:id="@+id/thumbnail_container"
+      android:layout_width="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:layout_height="wrap_content">
 
       <ImageView
+        android:id="@+id/submission_item_thumbnail"
+        style="@style/image"
+        android:src="@drawable/ic_do_not_distrub_black_24dp"
+        android:transitionName="image"/>
+    </FrameLayout>
+
+    <TextView
+      android:id="@+id/submission_item_title"
+      style="@style/submission_item_title"
+      android:layout_gravity="center_vertical"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="This is the title of the post. asdf sadf asdf asdfdfasdf  sdfasdf  asdfIt is a long one.  I don't know. ANother sentence here just o be sure that we wrap."/>
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="24dp"
+      android:baselineAligned="false"
+      android:layout_below="@id/submission_content"
+      android:layout_marginTop="12dp">
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:gravity="start"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5">
+
+        <ImageView
+          android:id="@+id/submission_item_icon_comment"
+          style="@style/submission_item_comment_icon"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/ic_comment_black_24dp"/>
+
+        <TextView
+          android:id="@+id/submission_item_comments"
+          style="@style/submission_item_comments"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="12345"/>
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
           android:id="@+id/submission_item_up_arrow"
           style="@style/submission_item_detail_icon"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:src="@drawable/ic_arrow_upward_black_24dp" />
+          android:src="@drawable/ic_arrow_up_bold_grey600_24dp"/>
 
-      <TextView
+        <TextView
           android:id="@+id/submission_item_score"
           style="@style/submission_item_score"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="78907" />
+          android:text="78907"/>
 
-      <ImageView
+        <ImageView
           android:id="@+id/submission_item_down_arrow"
           style="@style/submission_item_detail_icon"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:src="@drawable/ic_arrow_downward_black_24dp" />
+          android:src="@drawable/ic_arrow_down_bold_grey600_24dp"/>
+      </LinearLayout>
+
     </LinearLayout>
 
   </RelativeLayout>
 
-</LinearLayout>
+
+  <!--
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:id="@+id/submission_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+          android:id="@+id/submission_item_subreddit"
+          style="@style/submission_item_subreddit"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight=".5"
+          android:gravity="start"
+          android:text="r/todayilearned"/>
+
+        <TextView
+          android:id="@+id/submission_item_author"
+          style="@style/submission_item_subreddit"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight=".5"
+          android:gravity="end"
+          android:text="/u/blahblah"
+          android:textStyle="italic"/>
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/submission_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp">
+
+        <TextView
+          android:id="@+id/submission_item_title"
+          style="@style/submission_item_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="This is the title of the post. asdf sadf asdf asdfdfasdf  sdfasdf  asdfIt is a long one.  I don't know. ANother sentence here just o be sure that we wrap."/>
+
+        <FrameLayout
+          android:id="@+id/thumbnail_container"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+          <ImageView
+            android:id="@+id/submission_item_thumbnail"
+            style="@style/image"
+            android:src="@drawable/ic_do_not_distrub_black_24dp"
+            android:transitionName="image"/>
+        </FrameLayout>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="36dp"
+    android:layout_below="@id/thumbnail_container"
+    android:layout_marginTop="12dp">
+
+    <LinearLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight=".5">
+
+      <ImageView
+        android:id="@+id/submission_item_icon_comment"
+        style="@style/submission_item_comment_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_comment_black_24dp"/>
+
+      <TextView
+        android:id="@+id/submission_item_comments"
+        style="@style/submission_item_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12345"/>
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight=".5"
+      android:gravity="end"
+      android:orientation="horizontal">
+
+      <ImageView
+        android:id="@+id/submission_item_up_arrow"
+        style="@style/submission_item_detail_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_up_bold_grey600_24dp"/>
+
+      <TextView
+        android:id="@+id/submission_item_score"
+        style="@style/submission_item_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="78907"/>
+
+      <ImageView
+        android:id="@+id/submission_item_down_arrow"
+        style="@style/submission_item_detail_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_down_bold_grey600_24dp"/>
+    </LinearLayout>
+
+  </LinearLayout>
+  -->
+

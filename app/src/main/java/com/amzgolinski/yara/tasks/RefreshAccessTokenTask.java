@@ -7,7 +7,8 @@ import android.util.Log;
 import com.amzgolinski.yara.YaraApplication;
 import com.amzgolinski.yara.callbacks.AccountRetrievedCallback;
 import com.amzgolinski.yara.service.YaraUtilityService;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.RedditUtils;
+import com.amzgolinski.yara.util.AndroidUtils;
 
 import net.dean.jraw.auth.AuthenticationManager;
 import net.dean.jraw.auth.NoSuchTokenException;
@@ -33,7 +34,7 @@ public class RefreshAccessTokenTask extends AsyncTask<Void, Void, LoggedInAccoun
   protected LoggedInAccount doInBackground(Void... params) {
     LoggedInAccount account = null;
 
-    if (!Utils.isNetworkAvailable(mContext)) {
+    if (!AndroidUtils.isNetworkAvailable(mContext)) {
       mMessage = YaraUtilityService.STATUS_NO_INTERNET;
       return null;
     }
@@ -55,7 +56,7 @@ public class RefreshAccessTokenTask extends AsyncTask<Void, Void, LoggedInAccoun
   @Override
   protected void onPostExecute(LoggedInAccount account) {
     Log.d(LOG_TAG, "onPostExecute");
-    Utils.clearAuthRefreshStatus(mContext);
+    RedditUtils.clearAuthRefreshStatus(mContext);
     mCallback.onAccountRetrieved(account, mMessage);
   }
 }

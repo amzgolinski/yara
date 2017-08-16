@@ -7,7 +7,7 @@ import android.util.Log;
 import com.amzgolinski.yara.callbacks.RedditDownloadCallback;
 import com.amzgolinski.yara.model.CommentItem;
 import com.amzgolinski.yara.service.YaraUtilityService;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.AndroidUtils;
 
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.auth.AuthenticationManager;
@@ -35,7 +35,7 @@ public class FetchCommentsTask extends AsyncTask<String, Void, ArrayList<Comment
     //Log.d(LOG_TAG, "doInBackground");
     ArrayList<CommentItem> toReturn = new ArrayList<>();
     mMessage = YaraUtilityService.STATUS_OK;
-    if (!Utils.isNetworkAvailable(mContext)) {
+    if (!AndroidUtils.isNetworkAvailable(mContext)) {
       mMessage = YaraUtilityService.STATUS_NO_INTERNET;
       return toReturn;
     }

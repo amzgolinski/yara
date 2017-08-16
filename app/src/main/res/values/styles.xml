@@ -1,6 +1,5 @@
 <resources>
 
-
   <!-- Base application theme. -->
   <style name="Theme.Yara.Light" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- Customize your theme here. -->
@@ -17,15 +16,14 @@
   </style>
 
   <style name="Theme.Yara.Light.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
   <style name="Theme.Yara.Light.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
   <!-- submission list image -->
   <style name="image">
     <item name="android:layout_width">@dimen/image_width</item>
     <item name="android:layout_height">@dimen/image_height</item>
-    <item name="android:adjustViewBounds">true</item>
-    <item name="android:layout_gravity">start</item>
+    <item name="android:adjustViewBounds">false</item>
+    <item name="android:layout_gravity">center</item>
     <item name="android:scaleType">centerCrop</item>
   </style>
 
@@ -34,6 +32,7 @@
     <item name="android:textSize">@dimen/submission_item_text_size</item>
     <item name="android:paddingBottom">@dimen/submission_item_padding_bottom</item>
     <item name="android:paddingStart">@dimen/submission_item_padding_start</item>
+    <item name="android:textColor">@color/gray_600</item>
   </style>
 
   <!-- submission list subreddit name -->
@@ -41,20 +40,21 @@
     <item name="android:textSize">@dimen/submission_item_title_size</item>
     <item name="android:paddingBottom">@dimen/submission_item_padding_bottom</item>
     <item name="android:paddingStart">@dimen/submission_item_padding_start</item>
+    <item name="android:textStyle">bold</item>
   </style>
 
   <!-- submission list subreddit comment count -->
   <style name="submission_item_comments">
-    <item name="android:textSize">@dimen/submission_item_text_size</item>
+    <item name="android:textSize">@dimen/submission_item_comment_text_size</item>
     <item name="android:paddingBottom">@dimen/submission_item_padding_bottom</item>
     <item name="android:paddingStart">@dimen/submission_item_detail_padding_start</item>
-    <item name="android:paddingTop">@dimen/submission_item_padding_top</item>
+    <item name="android:textColor">@color/gray_600</item>
   </style>
 
   <!-- submission list subreddit score -->
   <style name="submission_item_score">
-    <item name="android:textSize">@dimen/submission_item_text_size</item>
-    <item name="android:textColor">@color/accent</item>
+    <item name="android:textSize">@dimen/submission_item_count_text_size</item>
+    <item name="android:textColor">@color/gray_600</item>
     <item name="android:paddingStart">@dimen/submission_item_detail_padding_start</item>
     <item name="android:layout_gravity">center_vertical</item>
   </style>
@@ -62,7 +62,7 @@
   <!-- submission list comment icon -->
   <style name="submission_item_comment_icon">
     <item name="android:paddingStart">@dimen/submission_item_comment_icon_padding</item>
-    <item name="android:layout_gravity">center_vertical</item>
+    <item name="android:tint">@color/gray_600</item>
   </style>
 
   <!-- submission list comment icon -->
@@ -113,6 +113,7 @@
   <!-- submission detail comment icon -->
   <style name="submission_detail_comment_icon">
     <item name="android:paddingStart">@dimen/submission_detail_padding_start</item>
+    <item name="android:tint">@color/gray_600</item>
   </style>
 
   <!-- submission detail comment count -->
@@ -129,7 +130,7 @@
     <item name="android:paddingEnd">@dimen/submission_detail_score_padding</item>
     <item name="android:paddingStart">@dimen/submission_detail_score_padding</item>
     <item name="android:layout_centerVertical">true</item>
-    <item name="android:textColor">@color/accent</item>
+    <item name="android:textColor">@color/gray_600</item>
   </style>
 
   <!-- submission detail arrow icons -->

@@ -1,9 +1,9 @@
 package com.amzgolinski.yara.adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +15,8 @@ import android.widget.TextView;
 import com.amzgolinski.yara.R;
 import com.amzgolinski.yara.model.CommentItem;
 import com.amzgolinski.yara.service.YaraUtilityService;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.StringUtils;
+import com.amzgolinski.yara.util.AndroidUtils;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
@@ -23,7 +24,6 @@ import java.util.ArrayList;
 
 
 public class CommentsAdapter extends ArrayAdapter<CommentItem> {
-
   private static final String LOG_TAG = CommentsAdapter.class.getName();
 
   private static class ViewHolder {
@@ -67,7 +67,7 @@ public class CommentsAdapter extends ArrayAdapter<CommentItem> {
     if (comment.getType() == CommentItem.CommentType.HAS_MORE_COMMENTS) {
 
       viewHolder.commentBody.setClickable(true);
-      viewHolder.commentAuthor.setText(Utils.EMPTY_STRING);
+      viewHolder.commentAuthor.setText(StringUtils.EMPTY_STRING);
       viewHolder.commentBody.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -81,22 +81,23 @@ public class CommentsAdapter extends ArrayAdapter<CommentItem> {
               mContext.getResources().getString(R.string.more_comments),
               comment.getMoreCommentsCount()
           ));
-      viewHolder.commentBody.setTextAppearance(R.style.comment_more_comments);
-
+      viewHolder.commentBody
+          = this.setTextAppearance(viewHolder.commentBody, R.style.comment_more_comments);
     } else {
       viewHolder.commentBody.setClickable(false);
-      viewHolder.commentBody.setTextAppearance(R.style.comment_text);
+      viewHolder.commentBody
+          = this.setTextAppearance(viewHolder.commentBody, R.style.comment_text);
 
       // author
       viewHolder.commentAuthor.setText(comment.getAuthor());
 
       // comment body
       String unescape = StringEscapeUtils.unescapeHtml4(comment.getBody());
-      viewHolder.commentBody.setText(Html.fromHtml(Utils.removeHtmlSpacing(unescape)));
+      viewHolder.commentBody.setText(Html.fromHtml(StringUtils.removeHtmlSpacing(unescape)));
       viewHolder.commentBody.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    int indent = Utils.convertDpToPixels(mContext, 16) * comment.getDepth();
+    int indent = AndroidUtils.convertDpToPixels(mContext, 16) * comment.getDepth();
     LinearLayout.LayoutParams llp
         = (LinearLayout.LayoutParams) viewHolder.commentContainer.getLayoutParams();
     llp.setMargins(indent, 0, 0, 0); //
@@ -114,6 +115,14 @@ public class CommentsAdapter extends ArrayAdapter<CommentItem> {
     this.clear();
     this.addAll(comments);
     this.notifyDataSetChanged();
+  }
+
+  private TextView setTextAppearance(TextView view, int styleCode) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+      view.setTextAppearance(styleCode);
+    else
+      view.setTextAppearance(mContext, styleCode);
+    return view;
   }
 
 }

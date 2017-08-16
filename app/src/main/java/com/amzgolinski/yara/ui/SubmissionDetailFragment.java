@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.amzgolinski.yara.R;
 import com.amzgolinski.yara.adapter.CommentsAdapter;
@@ -32,12 +30,11 @@ import com.amzgolinski.yara.data.RedditContract;
 import com.amzgolinski.yara.model.CommentItem;
 import com.amzgolinski.yara.service.YaraUtilityService;
 import com.amzgolinski.yara.tasks.FetchCommentsTask;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.RedditUtils;
+import com.amzgolinski.yara.util.AndroidUtils;
 import com.commonsware.cwac.merge.MergeAdapter;
 
 import java.util.ArrayList;
-
-import okhttp3.internal.Util;
 
 
 public class SubmissionDetailFragment extends Fragment
@@ -103,7 +100,7 @@ public class SubmissionDetailFragment extends Fragment
       mSubmissionUri = getActivity().getIntent().getData();
     }
 
-    String id = Utils.longToRedditId(ContentUris.parseId(mSubmissionUri));
+    String id = RedditUtils.longToRedditId(ContentUris.parseId(mSubmissionUri));
     new FetchCommentsTask(this.getContext(), this).execute(id);
     mReciever =  new BroadcastReceiver() {
       @Override
@@ -172,7 +169,7 @@ public class SubmissionDetailFragment extends Fragment
       mCommentsAdapter.setComments(mComments);
       mCommentsAdapter.addAll(mComments);
     } else {
-      Utils.handleError(getContext(), message);
+      AndroidUtils.handleError(getContext(), message);
     }
   }
 
@@ -199,7 +196,7 @@ public class SubmissionDetailFragment extends Fragment
   public boolean onOptionsItemSelected(MenuItem item) {
     Log.d(LOG_TAG, "onOptionsItemSelected");
     // Handle item selection
-    boolean isNetworkAvailable = Utils.isNetworkAvailable(getContext());
+    boolean isNetworkAvailable = AndroidUtils.isNetworkAvailable(getContext());
     String msg = getContext().getResources().getString(R.string.error_no_internet);
 
     switch (item.getItemId()) {
@@ -210,7 +207,7 @@ public class SubmissionDetailFragment extends Fragment
               getContext().getResources().getString(R.string.share_text))
           );
         } else {
-          Utils.showToast(getContext(), msg);
+          AndroidUtils.showToast(getContext(), msg);
         }
         return true;
 
@@ -221,7 +218,7 @@ public class SubmissionDetailFragment extends Fragment
           YaraUtilityService.refreshSubmission(getContext(), submissionId);
           mCommentsAdapter.setComments(new ArrayList<CommentItem>());
         }
-        Utils.showToast(getContext(), msg);
+        AndroidUtils.showToast(getContext(), msg);
         return true;
       default:
         return super.onOptionsItemSelected(item);
@@ -254,7 +251,7 @@ public class SubmissionDetailFragment extends Fragment
   }
 
   private void handleError(Intent intent) {
-    Utils.handleError(getContext(), intent.getStringExtra(YaraUtilityService.PARAM_MESSAGE));
+    AndroidUtils.handleError(getContext(), intent.getStringExtra(YaraUtilityService.PARAM_MESSAGE));
   }
 
   private void handleSuccess(Intent intent) {
@@ -262,7 +259,7 @@ public class SubmissionDetailFragment extends Fragment
       restartLoader();
     } else if (intent.getAction().equals(YaraUtilityService.ACTION_REFRESH_SUBMISSION)) {
       restartLoader();
-      String id = Utils.longToRedditId(ContentUris.parseId(mSubmissionUri));
+      String id = RedditUtils.longToRedditId(ContentUris.parseId(mSubmissionUri));
       new FetchCommentsTask(
           SubmissionDetailFragment.this.getContext(),
           SubmissionDetailFragment.this).execute(id);

@@ -24,7 +24,7 @@
       android:theme="@style/Theme.Yara.Light">
     <meta-data
         android:name="net.dean.jraw.USER_AGENT_OVERRIDE"
-        android:value="android:com.amgolinski.yara:v1.0.0 (by /u/capstone_test)"/>
+        android:value="android:com.amgolinski.yara:v1.0.0 (by /u/yara_android)"/>
 
     <activity
         android:name=".activity.SubmissionListActivity"
@@ -127,6 +127,7 @@
     <service
         android:name=".service.YaraUtilityService"
         android:exported="false"/>
+
     <service
         android:name=".service.YaraWidgetService"
         android:exported="false"

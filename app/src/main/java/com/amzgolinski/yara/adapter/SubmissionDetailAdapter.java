@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CursorAdapter;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +21,8 @@ import com.amzgolinski.yara.R;
 import com.amzgolinski.yara.service.YaraUtilityService;
 import com.amzgolinski.yara.ui.SubmissionDetailFragment;
 import com.amzgolinski.yara.ui.SubmissionListFragment;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.RedditUtils;
+import com.amzgolinski.yara.util.StringUtils;
 import com.squareup.picasso.Picasso;
 
 import net.dean.jraw.models.VoteDirection;
@@ -67,7 +70,7 @@ public class SubmissionDetailAdapter extends CursorAdapter {
     );
     mSubredditName.setText(subredditText);
     String selfText = cursor.getString(SubmissionDetailFragment.COL_TEXT);
-    if (Utils.isStringEmpty(selfText)) {
+    if (StringUtils.isStringEmpty(selfText)) {
       mSubmissionText.setVisibility(View.GONE);
     } else {
       mSubmissionText.setText(Html.fromHtml(selfText));
@@ -92,14 +95,15 @@ public class SubmissionDetailAdapter extends CursorAdapter {
 
     // submission thumbnail
     String thumbnail = cursor.getString(SubmissionDetailFragment.COL_THUMBNAIL);
+    Log.d(LOG_TAG, "URL: " + thumbnail);
     final String url = cursor.getString(SubmissionDetailFragment.COL_URL);
-    if (!Utils.isStringEmpty(thumbnail)) {
+    if (!StringUtils.isStringEmpty(thumbnail) && URLUtil.isValidUrl(thumbnail)) {
       Picasso.with(context)
           .load(thumbnail)
           .error(R.drawable.ic_do_not_distrub_black_24dp)
           .into(mThumbnail);
 
-      if (!Utils.isStringEmpty(url)) {
+      if (!StringUtils.isStringEmpty(url)) {
         mThumbnail.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
@@ -118,11 +122,11 @@ public class SubmissionDetailAdapter extends CursorAdapter {
 
     int vote  = cursor.getInt(SubmissionDetailFragment.COL_VOTE);
     ImageView upArrowView = (ImageView) view.findViewById(R.id.up_arrow);
-    Drawable upArrow = context.getDrawable(R.drawable.ic_arrow_upward_black_24dp);
+    Drawable upArrow = context.getDrawable(R.drawable.ic_arrow_up_bold_grey600_24dp);
     if (vote == VoteDirection.UPVOTE.getValue()) {
-      upArrow.setTint(context.getColor(R.color.accent));
+      upArrow.setTint(ContextCompat.getColor(context, R.color.accent));
     } else {
-      upArrow.setTint(context.getColor(R.color.black));
+      upArrow.setTint(ContextCompat.getColor(context, R.color.gray_600));
     }
     upArrowView.setImageDrawable(upArrow);
     upArrowView.setTag(R.string.submission_id, submissionId);
@@ -132,16 +136,16 @@ public class SubmissionDetailAdapter extends CursorAdapter {
       public void onClick(View v) {
         long submissionId = Long.parseLong((String)v.getTag(R.string.submission_id));
         int vote = (Integer) v.getTag(R.string.vote);
-        YaraUtilityService.submitVote(mContext, submissionId, vote, Utils.UPVOTE);
+        YaraUtilityService.submitVote(mContext, submissionId, vote, RedditUtils.UPVOTE);
       }
     });
 
     ImageView downArrowView = (ImageView) view.findViewById(R.id.down_arrow);
-    Drawable downArrow = context.getDrawable(R.drawable.ic_arrow_downward_black_24dp);
+    Drawable downArrow = context.getDrawable(R.drawable.ic_arrow_down_bold_grey600_24dp);
     if (vote == VoteDirection.DOWNVOTE.getValue()) {
-      downArrow.setTint(context.getColor(R.color.accent));
+      downArrow.setTint(ContextCompat.getColor(context, R.color.accent));
     } else {
-      downArrow.setTint(context.getColor(R.color.black));
+      downArrow.setTint(ContextCompat.getColor(context, R.color.gray_600));
     }
     downArrowView.setImageDrawable(downArrow);
     downArrowView.setTag(R.string.submission_id, submissionId);
@@ -151,7 +155,7 @@ public class SubmissionDetailAdapter extends CursorAdapter {
       public void onClick(View v) {
         long submissionId = Long.parseLong((String)v.getTag(R.string.submission_id));
         int vote = (Integer) v.getTag(R.string.vote);
-        YaraUtilityService.submitVote(mContext, submissionId, vote, Utils.DOWNVOTE);
+        YaraUtilityService.submitVote(mContext, submissionId, vote, RedditUtils.DOWNVOTE);
       }
     });
   }

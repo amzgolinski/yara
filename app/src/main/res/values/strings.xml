@@ -1,7 +1,7 @@
 <resources>
   <!-- application strings -->
   <string name="app_name">YARA</string>
-  <string name="redirect_url">https://github.com/amzgolinski/udacity-capstone</string>
+  <string name="redirect_url">https://github.com/amzgolinski/yara</string>
 
   <!-- Navigation drawer strings -->
   <string name="drawer_open">Open navigation drawer</string>
@@ -42,7 +42,7 @@
   <!-- display string -->
   <string name="submissions_loading">Loading...</string>
   <string name="subreddit_name">/r/%1$s</string>
-  <string name="submission_comment_count">%1$d comment(s)</string>
+  <string name="submission_comment_count">%1$d</string>
   <string name="more_comments">(%1$d) more comments</string>
   <string name="add_account_prompt">Please add an account.</string>
   <string name="press_allow">You must press \'allow\' to log in with this account</string>
@@ -55,10 +55,6 @@
   <string name="action_settings">Settings</string>
   <string name="action_save">Save</string>
 
-  <!-- firebase -->
-  <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-  <string name="pub_id">"ca-app-pub-3940256099942544~3347511713"</string>
-
   <!-- Sync Adapter -->
   <string name="sync_account_type">yara.amzgolinski.com</string>
   <string name="content_authority">com.amzgolinski.yara.provider</string>
@@ -67,10 +63,6 @@
   <string name="empty_view_text">There is no data to display.</string>
   <string name="appwidget_text_detail">%1$s\t-\t%2$d</string>
   <string name="appwidget_text">Yara</string>
-
-  <!-- firebase strings -->
-  <string name="location_detail">detail</string>
-  <string name="location_list">list</string>
 
   <!-- error messages -->
   <string name="error_network_exception">There was an error processing your request.</string>

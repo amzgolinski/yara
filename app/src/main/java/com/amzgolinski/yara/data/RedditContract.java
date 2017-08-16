@@ -6,7 +6,8 @@ import android.content.ContentValues;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.RedditUtils;
+import com.amzgolinski.yara.util.StringUtils;
 
 import net.dean.jraw.models.Submission;
 
@@ -84,10 +85,10 @@ public class RedditContract {
 
     public static ContentValues submissionToContentValue(Submission submission) {
       ContentValues toReturn = new ContentValues();
-      toReturn.put(SubmissionsEntry.COLUMN_SUBMISSION_ID, Utils.redditIdToLong(submission.getId()));
+      toReturn.put(SubmissionsEntry.COLUMN_SUBMISSION_ID, RedditUtils.redditIdToLong(submission.getId()));
       toReturn.put(
           SubmissionsEntry.COLUMN_SUBREDDIT_ID,
-          Utils.redditParentIdToLong(submission.getSubredditId())
+          RedditUtils.redditParentIdToLong(submission.getSubredditId())
       );
       toReturn.put(SubmissionsEntry.COLUMN_SUBREDDIT_NAME, submission.getSubredditName());
       toReturn.put(SubmissionsEntry.COLUMN_AUTHOR, submission.getAuthor());
@@ -98,14 +99,14 @@ public class RedditContract {
       toReturn.put(SubmissionsEntry.COLUMN_URL, submission.getUrl());
       toReturn.put(SubmissionsEntry.COLUMN_COMMENT_COUNT, submission.getCommentCount());
       toReturn.put(SubmissionsEntry.COLUMN_SCORE, submission.getScore());
-      int readOnly = (Utils.isSubmissionReadOnly(submission) ? 1 : 0);
+      int readOnly = (RedditUtils.isSubmissionReadOnly(submission) ? 1 : 0);
       toReturn.put(SubmissionsEntry.COLUMN_IS_READ_ONLY, readOnly);
       toReturn.put(SubmissionsEntry.COLUMN_THUMBNAIL, submission.getThumbnail());
 
       String selfText = submission.data("selftext_html");
-      if (!Utils.isStringEmpty(selfText)) {
+      if (!StringUtils.isStringEmpty(selfText)) {
         selfText = StringEscapeUtils.unescapeHtml4(selfText);
-        selfText = Utils.removeHtmlSpacing(selfText);
+        selfText = StringUtils.removeHtmlSpacing(selfText);
       }
       toReturn.put(SubmissionsEntry.COLUMN_TEXT, selfText);
       toReturn.put(SubmissionsEntry.COLUMN_VOTE, submission.getVote().getValue());

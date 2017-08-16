@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.Context;
 import android.net.Uri;
-import android.os.NetworkOnMainThreadException;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
@@ -14,7 +13,8 @@ import com.amzgolinski.yara.data.RedditContract;
 import com.amzgolinski.yara.model.CommentItem;
 import com.amzgolinski.yara.model.YaraContribution;
 import com.amzgolinski.yara.model.YaraThing;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.RedditUtils;
+import com.amzgolinski.yara.util.AndroidUtils;
 
 import net.dean.jraw.ApiException;
 import net.dean.jraw.RedditClient;
@@ -137,7 +137,7 @@ public class YaraUtilityService extends IntentService {
     if (intent != null) {
 
       final String action = intent.getAction();
-      if (!Utils.isNetworkAvailable(getApplicationContext())) {
+      if (!AndroidUtils.isNetworkAvailable(getApplicationContext())) {
         broadcastResult(new Intent(intent.getAction()), false, STATUS_NO_INTERNET);
         return;
       }
@@ -195,7 +195,7 @@ public class YaraUtilityService extends IntentService {
           .delete(RedditContract.SubredditsEntry.CONTENT_URI, null, null);
 
       Log.d(LOG_TAG, "Deleted " + numDeleted);
-      Utils.logOutCurrentUser(getApplicationContext());
+      RedditUtils.logOutCurrentUser(getApplicationContext());
       result.putExtra(PARAM_STATUS, STATUS_OK);
     } catch (NetworkException networkException) {
       Log.e(LOG_TAG, networkException.toString());
@@ -237,7 +237,7 @@ public class YaraUtilityService extends IntentService {
     Intent result = new Intent(ACTION_REFRESH_SUBMISSION);
     boolean status = true;
     String message = STATUS_OK;
-    String id = Utils.longToRedditId(submissionId); // converting long to Reddit ID
+    String id = RedditUtils.longToRedditId(submissionId); // converting long to Reddit ID
     RedditClient reddit = AuthenticationManager.get().getRedditClient();
     // submit reply to the server
     // TODO: handle error
@@ -258,7 +258,7 @@ public class YaraUtilityService extends IntentService {
     boolean status = true;
     String message = STATUS_OK;
 
-    String id = Utils.longToRedditId(submissionId); // converting long to Reddit ID
+    String id = RedditUtils.longToRedditId(submissionId); // converting long to Reddit ID
     RedditClient reddit = AuthenticationManager.get().getRedditClient();
     // submit reply to the server
     // TODO: handle error
@@ -282,10 +282,10 @@ public class YaraUtilityService extends IntentService {
     boolean status = true;
     String message = STATUS_OK;
 
-    VoteDirection direction = Utils.getVote(currentVote, newVote);
+    VoteDirection direction = RedditUtils.getVote(currentVote, newVote);
 
     RedditClient reddit = AuthenticationManager.get().getRedditClient();
-    String redditId = Utils.longToRedditId(submissionId);
+    String redditId = RedditUtils.longToRedditId(submissionId);
     YaraThing submission = new YaraThing(redditId, YaraThing.Type.SUBMISSION);
 
     // submit vote to the server
@@ -330,7 +330,7 @@ public class YaraUtilityService extends IntentService {
   }
 
   private void updateSubmission(Submission submission) {
-    long id = Utils.redditIdToLong(submission.getId());
+    long id = RedditUtils.redditIdToLong(submission.getId());
     Uri submissionUri = RedditContract.SubmissionsEntry.buildSubmissionUri(id);
     ContentValues toInsert = RedditContract.SubmissionsEntry.submissionToContentValue(submission);
     this.getContentResolver().update(submissionUri, toInsert, null, null);
@@ -339,7 +339,7 @@ public class YaraUtilityService extends IntentService {
   private void deleteSubreddit(String subredditId) {
 
     Log.d(LOG_TAG, "Deleting " + subredditId);
-    long id = Utils.redditIdToLong(subredditId);
+    long id = RedditUtils.redditIdToLong(subredditId);
     Log.d(LOG_TAG, "Deleting " + id);
     String selector = RedditContract.SubmissionsEntry.COLUMN_SUBREDDIT_ID + " = ?";
     String[] args = new String[] {Long.toString(id)};
@@ -393,7 +393,7 @@ public class YaraUtilityService extends IntentService {
     values.put(RedditContract.SubmissionsEntry.COLUMN_VOTE, submission.getVote().getValue());
     values.put(RedditContract.SubmissionsEntry.COLUMN_SCORE, submission.getScore());
 
-    long id = Utils.redditIdToLong(submission.getId());
+    long id = RedditUtils.redditIdToLong(submission.getId());
     Uri submissionUri = RedditContract.SubmissionsEntry.buildSubmissionUri(id);
     int numUpdated = this.getContentResolver().update(
         submissionUri,
@@ -407,7 +407,7 @@ public class YaraUtilityService extends IntentService {
     ContentValues values = new ContentValues();
     values.put(RedditContract.SubmissionsEntry.COLUMN_COMMENT_COUNT, submission.getCommentCount());
 
-    long id = Utils.redditIdToLong(submission.getId());
+    long id = RedditUtils.redditIdToLong(submission.getId());
     Uri submissionUri = RedditContract.SubmissionsEntry.buildSubmissionUri(id);
     int numUpdated = this.getContentResolver().update(
         submissionUri,
@@ -416,6 +416,4 @@ public class YaraUtilityService extends IntentService {
         new String[]{submission.getId()});
     return numUpdated;
   }
-
-
 }

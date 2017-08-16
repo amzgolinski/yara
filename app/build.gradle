@@ -20,7 +20,7 @@ android {
     buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.amzgolinski.yara"
-        minSdkVersion 24
+        minSdkVersion 22
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -66,5 +66,3 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'com.android.support:multidex:1.0.1'
 }
-
-apply plugin: 'com.google.gms.google-services'

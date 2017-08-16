@@ -19,7 +19,8 @@ import net.dean.jraw.http.oauth.OAuthHelper;
 import com.amzgolinski.yara.R;
 import com.amzgolinski.yara.YaraApplication;
 import com.amzgolinski.yara.service.YaraUtilityService;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.RedditUtils;
+import com.amzgolinski.yara.util.AndroidUtils;
 
 import java.net.URL;
 
@@ -79,16 +80,16 @@ public class LoginActivity extends AppCompatActivity {
           String token =
               AuthenticationManager.get().getRedditClient().getOAuthHelper().getRefreshToken();
 
-          Utils.setCurrentUser(LoginActivity.this.getApplicationContext(), user);
+          RedditUtils.setCurrentUser(LoginActivity.this.getApplicationContext(), user);
 
           return AuthenticationManager.get().getRedditClient().getAuthenticatedUser();
         } catch (NetworkException networkException) {
           Log.e(LOG_TAG, "Error logging into account.", networkException);
-          Utils.handleError(LoginActivity.this, YaraUtilityService.STATUS_NETWORK_EXCEPTION);
+          AndroidUtils.handleError(LoginActivity.this, YaraUtilityService.STATUS_NETWORK_EXCEPTION);
           return null;
         } catch (OAuthException oauthException) {
           Log.e(LOG_TAG, "Could not log in", oauthException);
-          Utils.handleError(LoginActivity.this, YaraUtilityService.STATUS_AUTH_EXCEPTION);
+          AndroidUtils.handleError(LoginActivity.this, YaraUtilityService.STATUS_AUTH_EXCEPTION);
           return null;
         }
       }

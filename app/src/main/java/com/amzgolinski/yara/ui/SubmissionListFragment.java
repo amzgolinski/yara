@@ -29,7 +29,8 @@ import com.amzgolinski.yara.data.RedditContract;
 import com.amzgolinski.yara.service.YaraUtilityService;
 import com.amzgolinski.yara.sync.SubredditSyncAdapter;
 import com.amzgolinski.yara.tasks.FetchSubredditsTask;
-import com.amzgolinski.yara.util.Utils;
+import com.amzgolinski.yara.util.RedditUtils;
+import com.amzgolinski.yara.util.AndroidUtils;
 
 import net.dean.jraw.auth.AuthenticationManager;
 import net.dean.jraw.auth.AuthenticationState;
@@ -102,7 +103,7 @@ public class SubmissionListFragment extends Fragment
       public void onReceive(Context context, Intent intent) {
         boolean status = intent.getBooleanExtra(YaraUtilityService.PARAM_STATUS, true);
         if (!status) {
-          Utils.handleError(getContext(), intent.getStringExtra(YaraUtilityService.PARAM_MESSAGE));
+          AndroidUtils.handleError(getContext(), intent.getStringExtra(YaraUtilityService.PARAM_MESSAGE));
         } else {
           restartLoader();
           mProgress.setVisibility(View.GONE);
@@ -151,7 +152,7 @@ public class SubmissionListFragment extends Fragment
         if (message.equals(YaraUtilityService.STATUS_OK)) {
           restartLoader();
         } else {
-          Utils.handleError(getContext(), message);
+          AndroidUtils.handleError(getContext(), message);
         }
       }
     });
@@ -165,7 +166,7 @@ public class SubmissionListFragment extends Fragment
   public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
     Log.d(LOG_TAG, "onLoadFinished");
     //Log.d(LOG_TAG, DatabaseUtils.dumpCursorToString(data));
-    Log.d(LOG_TAG, "Logged in: " + Utils.isLoggedIn(getContext()));
+    Log.d(LOG_TAG, "Logged in: " + RedditUtils.isLoggedIn(getContext()));
     if (mProgress.getVisibility() == View.VISIBLE) {
       mProgress.setVisibility(View.GONE);
     }
@@ -200,9 +201,9 @@ public class SubmissionListFragment extends Fragment
     LocalBroadcastManager.getInstance(getContext()).registerReceiver(
         mReceiver, new IntentFilter(SubredditSyncAdapter.ACTION_DATA_UPDATED));
 
-    if (Utils.isLoggedIn(getContext()) && !Utils.isRefreshing(getContext())) {
+    if (RedditUtils.isLoggedIn(getContext()) && !RedditUtils.isAuthRefreshing(getContext())) {
       AuthenticationState state = AuthenticationManager.get().checkAuthState();
-      Utils.updateAuth(getContext(), state, this);
+      RedditUtils.updateAuth(getContext(), state, this);
     }
   }
 
@@ -236,7 +237,7 @@ public class SubmissionListFragment extends Fragment
             mEmpty.setVisibility(View.VISIBLE);
           }
         } else {
-          Utils.handleError(getContext(), message);
+          AndroidUtils.handleError(getContext(), message);
         }
       }
     }).execute();
@@ -251,7 +252,7 @@ public class SubmissionListFragment extends Fragment
   public void onAccountRetrieved(LoggedInAccount account, String message) {
     Log.d(LOG_TAG, "onAccountRetrieved");
     if (!message.equals(YaraUtilityService.STATUS_OK)) {
-      Utils.handleError(getContext(), message);
+      AndroidUtils.handleError(getContext(), message);
     } else {
       fetchSubreddits();
     }
